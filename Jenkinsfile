@@ -75,13 +75,13 @@ spec:
         - name: GIT_AUTH_USER
           valueFrom:
             secretKeyRef:
-              name: git-credentials
+              name: git-credentials-jl
               key: username
               optional: true
         - name: GIT_AUTH_PWD
           valueFrom:
             secretKeyRef:
-              name: git-credentials
+              name: git-credentials-jl
               key: password
               optional: true
     - name: buildah
@@ -170,7 +170,7 @@ spec:
             name: gitops-repo
             optional: true
         - secretRef:
-            name: git-credentials
+            name: git-credentials-jl
             optional: true
 """
 ) {
@@ -215,7 +215,7 @@ spec:
                     set -e
 
                     if [[ -z "$GIT_AUTH_USER" ]] || [[ -z "$GIT_AUTH_PWD" ]]; then
-                      echo "Git credentials not found. The pipeline expects to find them in a secret named 'git-credentials'."
+                      echo "Git credentials not found. The pipeline expects to find them in a secret named 'git-credentials-jl'."
                       echo "  Update your CLI and register the pipeline again"
                       exit 1
                     fi
